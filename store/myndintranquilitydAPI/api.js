@@ -1,72 +1,58 @@
-import axios from "axios";
+import axios from "axios"
 const myndintranquilitydAPI = axios.create({
-  baseURL: "https://myndintranquility-d-80341-prod.herokuapp.com",
-  headers: {
-    Accept: "application/json",
-    "Content-Type": "application/json"
-  }
-});
-
+  baseURL: "https://myndintranquility-d-80341.botics.co",
+  headers: { Accept: "application/json", "Content-Type": "application/json" }
+})
 function api_v1_login_create(payload) {
-  return myndintranquilitydAPI.post(`/api/v1/login/`, payload.data);
+  return myndintranquilitydAPI.post(`/api/v1/login/`, payload)
 }
-
 function api_v1_signup_create(payload) {
-  return myndintranquilitydAPI.post(`/api/v1/signup/`, payload.data);
+  return myndintranquilitydAPI.post(`/api/v1/signup/`, payload)
 }
-
 function rest_auth_user_retrieve(payload) {
-  return myndintranquilitydAPI.get(`/rest-auth/user/`);
+  return myndintranquilitydAPI.get(`/rest-auth/user/`)
 }
-
 function rest_auth_user_update(payload) {
-  return myndintranquilitydAPI.put(`/rest-auth/user/`, payload.data);
+  return myndintranquilitydAPI.put(`/rest-auth/user/`, payload)
 }
-
 function rest_auth_user_partial_update(payload) {
-  return myndintranquilitydAPI.patch(`/rest-auth/user/`, payload.data);
+  return myndintranquilitydAPI.patch(`/rest-auth/user/`, payload)
 }
-
 function api_docs_schema_retrieve(payload) {
   return myndintranquilitydAPI.get(`/api-docs/schema/`, {
-    params: {
-      lang: payload.lang
-    }
-  });
+    params: { lang: payload.lang }
+  })
 }
-
 function rest_auth_login_create(payload) {
-  return myndintranquilitydAPI.post(`/rest-auth/login/`, payload.data);
+  return myndintranquilitydAPI.post(`/rest-auth/login/`, payload)
 }
-
 function rest_auth_logout_retrieve(payload) {
-  return myndintranquilitydAPI.get(`/rest-auth/logout/`);
+  return myndintranquilitydAPI.get(`/rest-auth/logout/`)
 }
-
 function rest_auth_logout_create(payload) {
-  return myndintranquilitydAPI.post(`/rest-auth/logout/`);
+  return myndintranquilitydAPI.post(`/rest-auth/logout/`)
 }
-
 function rest_auth_registration_create(payload) {
-  return myndintranquilitydAPI.post(`/rest-auth/registration/`, payload.data);
+  return myndintranquilitydAPI.post(`/rest-auth/registration/`, payload)
 }
-
 function rest_auth_password_reset_create(payload) {
-  return myndintranquilitydAPI.post(`/rest-auth/password/reset/`, payload.data);
+  return myndintranquilitydAPI.post(`/rest-auth/password/reset/`, payload)
 }
-
 function rest_auth_password_change_create(payload) {
-  return myndintranquilitydAPI.post(`/rest-auth/password/change/`, payload.data);
+  return myndintranquilitydAPI.post(`/rest-auth/password/change/`, payload)
 }
-
 function rest_auth_password_reset_confirm_create(payload) {
-  return myndintranquilitydAPI.post(`/rest-auth/password/reset/confirm/`, payload.data);
+  return myndintranquilitydAPI.post(
+    `/rest-auth/password/reset/confirm/`,
+    payload
+  )
 }
-
 function rest_auth_registration_verify_email_create(payload) {
-  return myndintranquilitydAPI.post(`/rest-auth/registration/verify-email/`, payload.data);
+  return myndintranquilitydAPI.post(
+    `/rest-auth/registration/verify-email/`,
+    payload
+  )
 }
-
 export const apiService = {
   api_v1_login_create,
   api_v1_signup_create,
@@ -82,4 +68,4 @@ export const apiService = {
   rest_auth_password_change_create,
   rest_auth_password_reset_confirm_create,
   rest_auth_registration_verify_email_create
-};
+}
