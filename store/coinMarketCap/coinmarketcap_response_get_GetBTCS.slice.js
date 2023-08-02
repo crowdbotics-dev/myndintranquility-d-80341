@@ -14,36 +14,39 @@ const coinmarketcap_response_get_GetBTCSSlice = createSlice({
   name: "coinmarketcap_response_get_GetBTCS",
   initialState,
   reducers: {},
-  extraReducers: {
-    [coinmarketcap_get_v1_cryptocurrency_quotes_latestsymbolBTC_read.pending]: (
-      state,
-      action
-    ) => {
-      if (state.api.loading === "idle") {
-        state.api.loading = "pending"
-      }
-    },
-    [coinmarketcap_get_v1_cryptocurrency_quotes_latestsymbolBTC_read.fulfilled]: (
-      state,
-      action
-    ) => {
-      if (state.api.loading === "pending") {
-        state.entities = [
-          ...state.entities.filter(record => record.id !== action.payload.id),
-          action.payload
-        ]
-        state.api.loading = "idle"
-      }
-    },
-    [coinmarketcap_get_v1_cryptocurrency_quotes_latestsymbolBTC_read.rejected]: (
-      state,
-      action
-    ) => {
-      if (state.api.loading === "pending") {
-        state.api.error = action.error
-        state.api.loading = "idle"
-      }
-    }
+  extraReducers: builder => {
+    builder
+      .addCase(
+        coinmarketcap_get_v1_cryptocurrency_quotes_latestsymbolBTC_read.pending,
+        (state, action) => {
+          if (state.api.loading === "idle") {
+            state.api.loading = "pending"
+          }
+        }
+      )
+      .addCase(
+        coinmarketcap_get_v1_cryptocurrency_quotes_latestsymbolBTC_read.fulfilled,
+        (state, action) => {
+          if (state.api.loading === "pending") {
+            state.entities = [
+              ...state.entities.filter(
+                record => record.id !== action.payload.id
+              ),
+              action.payload
+            ]
+            state.api.loading = "idle"
+          }
+        }
+      )
+      .addCase(
+        coinmarketcap_get_v1_cryptocurrency_quotes_latestsymbolBTC_read.rejected,
+        (state, action) => {
+          if (state.api.loading === "pending") {
+            state.api.error = action.error
+            state.api.loading = "idle"
+          }
+        }
+      )
   }
 })
 export default {

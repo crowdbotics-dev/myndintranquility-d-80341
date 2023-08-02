@@ -12,24 +12,25 @@ const coinmarketcap_response_post_PostSomethingsSlice = createSlice({
   name: "coinmarketcap_response_post_PostSomethings",
   initialState,
   reducers: {},
-  extraReducers: {
-    [coinmarketcap_post__create.pending]: (state, action) => {
-      if (state.api.loading === "idle") {
-        state.api.loading = "pending"
-      }
-    },
-    [coinmarketcap_post__create.fulfilled]: (state, action) => {
-      if (state.api.loading === "pending") {
-        state.entities.push(action.payload)
-        state.api.loading = "idle"
-      }
-    },
-    [coinmarketcap_post__create.rejected]: (state, action) => {
-      if (state.api.loading === "pending") {
-        state.api.error = action.error
-        state.api.loading = "idle"
-      }
-    }
+  extraReducers: builder => {
+    builder
+      .addCase(coinmarketcap_post__create.pending, (state, action) => {
+        if (state.api.loading === "idle") {
+          state.api.loading = "pending"
+        }
+      })
+      .addCase(coinmarketcap_post__create.fulfilled, (state, action) => {
+        if (state.api.loading === "pending") {
+          state.entities.push(action.payload)
+          state.api.loading = "idle"
+        }
+      })
+      .addCase(coinmarketcap_post__create.rejected, (state, action) => {
+        if (state.api.loading === "pending") {
+          state.api.error = action.error
+          state.api.loading = "idle"
+        }
+      })
   }
 })
 export default {
